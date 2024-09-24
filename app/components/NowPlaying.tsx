@@ -2,53 +2,62 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
-interface NowPlayingSong {
-  isPlaying: boolean;
-  title: string;
-  artist: string;
-  album: string;
-  albumImageUrl: string;
-  songUrl: string;
+interface Playlist {
+  name: string;
+  images: { url: string }[];
+  external_urls: { spotify: string };
 }
 
-const NowPlaying = () => {
-  const [song, setSong] = useState<NowPlayingSong | null>(null);
-  const [currentTime, setCurrentTime] = useState<string>(new Date().toLocaleString());
+const Playlist = () => {
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
-  const fetchNowPlaying = async () => {
-    const response = await fetch('http://localhost:3000/api/spotify', {
-      cache: 'no-store',
-    });
-    const data = await response.json();
-    setSong(data);
+  const fetchPlaylists = async () => {
+    try {
+      const response = await fetch('/api/spotify', {
+        cache: 'no-store',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch playlists');
+      }
+      const data = await response.json();
+      setPlaylists(data.items || []);
+    } catch (error) {
+      console.error('Error fetching playlists:', error);
+    }
   };
 
   useEffect(() => {
-    fetchNowPlaying(); // Initial fetch
+    fetchPlaylists(); // Initial fetch
   }, []);
 
-  if (!song?.isPlaying) {
-    return <p className="text-center text-gray-500">No song is currently playing.</p>;
+  if (!playlists.length) {
+    return <p className="text-center text-gray-500">No playlists available.</p>;
   }
 
   return (
-    <div className="flex flex-col items-center space-y-4 p-4 bg-transparent">
-      <div className="flex items-center space-x-4">
-        <Image
-          width={64}
-          height={64}
-          src={song.albumImageUrl}
-          alt={song.album}
-          className="w-16 h-16 rounded-md"
-        />
-        <div>
-          <p className="text-black font-semibold">{song.title}</p>
-          <p className="text-gray-400">{song.artist}</p>
-        </div>
-      </div>
-      <p className="text-gray-500">{currentTime}</p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {playlists.map((playlist) => (
+        <a
+          key={playlist.name}
+          href={playlist.external_urls.spotify}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center space-y-2 p-4 bg-transparent rounded-lg"
+        >
+          {playlist.images[0] && (
+            <Image
+              src={playlist.images[0].url}
+              alt={playlist.name}
+              width={150}
+              height={150}
+              className="rounded-lg"
+            />
+          )}
+          <p className="text-black font-semibold">{playlist.name}</p>
+        </a>
+      ))}
     </div>
   );
 };
 
-export default NowPlaying;
+export default Playlist;

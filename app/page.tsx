@@ -1,9 +1,8 @@
-
 import Image from "next/image";
 import ProjectList from "./components/ProjectList";
 import ActivityList from "./components/ActivityList";
 import NowPlaying from "./components/NowPlaying";
-import alfiansaherikgans from './assets/erikganz.jpg';
+import alfiansaherikgans from "./assets/erikganz.jpg";
 
 export default function Home() {
   return (
@@ -47,12 +46,24 @@ export default function Home() {
                 On Work
               </h2>
               <div className="flex flex-col justify-center items-center">
-                <div>
+                <div className="flex flex-col items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    className="text-gray-500 flex items-center justify-center mt-8"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M4.825 12.025L8.7 15.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.213-.325T2.426 12t.063-.375t.212-.325l2.875-2.875l-3.5-3.5q-.3-.3-.3-.712t.3-.713t.713-.3t.712.3l17 17q.3.3.3.7t-.3.7t-.712.3t-.713-.3L7 9.85zm12.9 2.825q-.3-.3-.3-.712t.3-.713l1.45-1.45L15.3 8.1q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-2.175 2.175q-.3.3-.7.288t-.7-.313"
+                    />
+                  </svg>
                   <h1 className="text-sm text-center font-bold text-gray-500">
-                    Not working anything now.
+                    Not Working
                   </h1>
                 </div>
-                <p className="text-xs text-center text-gray-500">
+                <p className="text-xs text-center text-gray-500 mt-2">
                   I&apos;m currently not working on any projects.
                 </p>
               </div>
