@@ -7,8 +7,8 @@ import alfiansaherikgans from "./assets/erikganz.jpg";
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col h-full mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 space-y-10 pb-8">
-        <div className="inter p-5 flex-1 flex flex-row justify-center items-center gap-56">
+      <div className="flex flex-col h-full mx-auto max-w-4xl pb-8">
+        <div className="inter flex-1 flex flex-row justify-center items-center gap-72">
           <div>
             <h1 className="text-lg font-semibold">
               Hey, I&apos;m Alfiansah Erik Sugiarto — an full stack dev.
@@ -29,7 +29,7 @@ export default function Home() {
         </div>
         <section id="all-section" className="justify-center items-center">
           <div className="grid grid-cols-2">
-            <div className="bg-white rounded-lg px-2 py-4 mt-10 border border-gray-200 relative lg:min-w-[430px] ml-8">
+            <div className="bg-white rounded-lg px-2 py-4 mt-10 border border-gray-200 relative lg:min-w-[470px] ml-8">
               <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
                 Projects
               </h2>
@@ -70,7 +70,7 @@ export default function Home() {
             </div>
             <div className="bg-white rounded-lg p-6 mt-10 border border-gray-200 relative lg:min-w-[200px] ml-8">
               <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
-                Music
+                Playlist
               </h2>
               <ul className="list-none p-0">
                 <li className="hover:bg-gray-100 rounded-xl">

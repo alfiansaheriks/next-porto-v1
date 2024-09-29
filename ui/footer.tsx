@@ -4,15 +4,15 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-white py-4">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div className="text-xs px-8">&copy; 2024</div>
-          <div className="flex space-x-4">
+      <footer className="bg-transparent py-4 flex justify-center">
+        <div className="flex flex-row items-center">
+          {/* <div className="text-xs">&copy; 2024</div> */}
+          <div className="flex">
             <a
               href="/dashboard"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-100 hover:text-gray-500 bg-white hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
+              className="text-gray-100 hover:text-gray-500 bg-transparent hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const Footer = () => {
               href="https://linkedin.com/in/yourusername"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-100 hover:text-gray-500 bg-white hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
+              className="text-gray-100 hover:text-gray-500 bg-transparent hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@ const Footer = () => {
               href="https://instagram.com/yourusername"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-100 hover:text-gray-500 bg-white hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
+              className="text-gray-100 hover:text-gray-500 bg-transparent hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
