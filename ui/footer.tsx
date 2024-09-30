@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <div>
       <footer className="bg-transparent py-4 flex justify-center">
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center gap-2">
           {/* <div className="text-xs">&copy; 2024</div> */}
           <div className="flex">
             <a
               href="/dashboard"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-100 hover:text-gray-500 bg-transparent hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
+              className="text-gray-100 hover:text-gray-500 bg-transparent hover:bg-gray-50 hover:border hover:border-gray-100 rounded-md p-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const Footer = () => {
               href="https://linkedin.com/in/yourusername"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-100 hover:text-gray-500 bg-transparent hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
+              className="text-gray-100 hover:text-gray-500 bg-transparent hover:border hover:bg-gray-50 rounded-md p-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@ const Footer = () => {
               href="https://instagram.com/yourusername"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-100 hover:text-gray-500 bg-transparent hover:bg-gray-50 border-2 border-gray-50 hover:border-gray-100 rounded-md p-2"
+              className="text-gray-100 hover:text-gray-500 bg-transparent hover:bg-gray-50 hover:border border-gray-50 hover:border-gray-100 rounded-md p-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

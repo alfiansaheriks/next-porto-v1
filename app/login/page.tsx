@@ -42,7 +42,7 @@ const Login = () => {
     setError(null);
     try {
       await loginUser(data as LoginData);
-      router.push("/dashboard");
+      router.push("/");
     } catch (err: any) {
         setError(err.message || "Terjadi kesalahan saat login");
         console.error("Login gagal:", err);

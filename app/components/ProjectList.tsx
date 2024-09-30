@@ -1,10 +1,21 @@
-'use client';
-
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faProjectDiagram, faFileCode, faCode, faChartSimple } from '@fortawesome/free-solid-svg-icons';
+import { Icon } from "@iconify/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faProjectDiagram,
+  faFileCode,
+  faCode,
+  faChartSimple,
+} from "@fortawesome/free-solid-svg-icons";
 import { Skeleton } from "@nextui-org/skeleton";
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu"; // Adjust path accordingly
+import { Button } from "@/components/ui/button";
 
 interface Project {
   id: number;
@@ -24,25 +35,28 @@ const iconMapping: Record<string, any> = {
   // Add other icons here as needed
 };
 
-const ProjectList = () => {
+interface ProjectListProps {
+  isLoggedIn: boolean;
+}
+
+const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:3333/projects', {
-        cache: 'no-store',
+      const response = await fetch("http://localhost:3333/projects", {
+        cache: "no-store",
       });
       if (!response.ok) {
-        throw new Error('Failed to fetch projects');
+        throw new Error("Failed to fetch projects");
       }
       const data = await response.json();
-      // console.log(data);
       setProjects(data || []);
     } catch (error) {
-      console.error('Error fetching projects:', error);
-      setError('Failed to fetch projects');
+      console.error("Error fetching projects:", error);
+      setError("Failed to fetch projects");
     } finally {
       setLoading(false);
     }
@@ -81,34 +95,77 @@ const ProjectList = () => {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     const year = String(date.getFullYear());
     return `${day}-${month}-${year}`;
   };
 
+  const handleEdit = (id: number) => {
+    // Handle edit logic here
+    console.log(`Edit project with id: ${id}`);
+  };
+
+  const handleDelete = (id: number) => {
+    // Handle delete logic here
+    console.log(`Delete project with id: ${id}`);
+  };
+
   return (
     <div className="overflow-hidden max-h-64">
-      <div className="overflow-y-auto max-h-64 scrollbar-hidden">
+      <div className="overflow-y-auto max-h-64 no-scrollbar">
         <ul className="list-none p-0">
           {projects.map((project) => (
-            <Link href={`/project/${project.slug}`} key={project.id}>
-            <li // Changed to project.id for a unique key
-              className="mb-2 hover:bg-gray-100 rounded-md hover:border p-2 flex items-center"
+            <li
+              key={project.id}
+              className="mb-2 group hover:bg-gray-100 rounded-md hover:border p-2"
             >
-              {/* Dynamically render the icon based on the project.icon string */}
-              
-              <FontAwesomeIcon icon={iconMapping[project.icon]} className="h-4 w-4 mr-2" />
-              <div className="flex justify-between w-full">
-                <h3 className="text-xs font-semibold text-gray-500">
-                  {project.name}
-                </h3>
-                <span className="text-xs text-gray-400 whitespace-nowrap">
-                  {formatDate(project.date)}
-                </span>
-              </div>
+              <Link href={`/project/${project.slug}`}>
+                <div className="flex items-center w-full">
+                  <Icon
+                    icon={project.icon}
+                    className="h-5 w-5 mr-2 text-gray-400 group-hover:text-gray-500"
+                  />
+                  <div className="flex justify-between items-center w-full">
+                    <h3 className="text-xs font-semibold text-gray-400 group-hover:text-gray-500">
+                      {project.name}
+                    </h3>
+                    {!isLoggedIn && (
+                      <span className="text-xs text-gray-400 whitespace-nowrap">
+                        {formatDate(project.date)}
+                      </span>
+                    )}
+                    {isLoggedIn && (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <Button
+                            variant={"outline"}
+                            className="ml-2 focus:outline-none shadow-none border-none bg-transparent hover:bg-transparent"
+                          >
+                            <Icon
+                              icon="mdi:dots-vertical"
+                              className="h-5 w-5 text-gray-500"
+                            />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem
+                            onClick={() => handleEdit(project.id)}
+                          >
+                            Edit
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => handleDelete(project.id)}
+                          >
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
+                  </div>
+                </div>
+              </Link>
             </li>
-            </Link>
           ))}
         </ul>
       </div>

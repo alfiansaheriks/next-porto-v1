@@ -1,17 +1,48 @@
+'use client'
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ProjectList from "./components/ProjectList";
 import ActivityList from "./components/ActivityList";
 import NowPlaying from "./components/NowPlaying";
 import alfiansaherikgans from "./assets/erikganz.jpg";
+import { getCookie, deleteCookie } from "@/utils/cookie";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@iconify/react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = getCookie("token"); // Replace "token" with your cookie name
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    deleteCookie("token"); // Replace "token" with your cookie name
+    setIsLoggedIn(false);
+    // Optionally, redirect to the login page or home page
+    router.push("/"); // Adjust the path as necessary
+  };
+
   return (
     <>
       <div className="flex flex-col h-full mx-auto max-w-4xl pb-8">
+      {isLoggedIn && (
+            <div className="flex justify-end mr-4 mb-4">
+              <Button variant={"outline"} onClick={handleLogout}>
+                Logout
+                </Button>
+            </div>
+          )}
         <div className="inter flex-1 flex flex-row justify-center items-center gap-72">
           <div>
             <h1 className="text-lg font-semibold">
-              Hey, I&apos;m Alfiansah Erik Sugiarto — an full stack dev.
+              Hey, I&apos;m Alfiansah Erik Sugiarto — a full stack dev.
             </h1>
             <h1 className="text-md font-semibold text-gray-500">
               Crafting Seamless Solutions in Cyberspace,
@@ -29,17 +60,31 @@ export default function Home() {
         </div>
         <section id="all-section" className="justify-center items-center">
           <div className="grid grid-cols-2">
-            <div className="bg-white rounded-lg px-2 py-4 mt-10 border border-gray-200 relative lg:min-w-[470px] ml-8">
+            <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative lg:min-w-[450px] ml-8">
               <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
                 Projects
               </h2>
-              <ProjectList />
+              <ProjectList isLoggedIn={isLoggedIn} />
+              {isLoggedIn && (
+                <div className="flex justify-end mt-2">
+                  <Button variant={"outline"}>
+                    <Icon icon="akar-icons:plus" className=""/>
+                  </Button>
+                </div>
+              )}
             </div>
-            <div className="bg-white rounded-lg p-6 mt-10 border border-gray-200 relative lg:min-w-[200px] ml-16">
+            <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative lg:min-w-[200px] ml-16">
               <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
                 Activity
               </h2>
-              <ActivityList />
+              <ActivityList isLoggedIn={isLoggedIn} />
+              {isLoggedIn && (
+                <div className="flex justify-end mt-2">
+                <Button variant={"outline"}>
+                  <Icon icon="akar-icons:plus" className=""/>
+                </Button>
+              </div>
+              )}
             </div>
             <div className="bg-white rounded-lg p-6 mt-10 border border-gray-200 relative lg:min-w-[200px] ml-8">
               <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
@@ -68,7 +113,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="bg-white rounded-lg p-6 mt-10 border border-gray-200 relative lg:min-w-[200px] ml-8">
+            <div className="bg-white rounded-lg p-6 mt-10 border border-gray-200 relative lg:min-w-[200px] lg:min-h-[100px] ml-8">
               <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
                 Playlist
               </h2>
