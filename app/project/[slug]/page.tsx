@@ -46,7 +46,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     };
 
     fetchProject();
-  }, [params.slug]);
+  }, [params.slug, apiUrl]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

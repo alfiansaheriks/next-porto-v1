@@ -70,7 +70,7 @@ export default function ProfileForm() {
       }
     }
     fetchData();
-  }, [id, form]);
+  }, [id, form, apiUrl]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // console.log(values);

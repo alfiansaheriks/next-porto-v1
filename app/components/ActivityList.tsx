@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Skeleton } from "@nextui-org/skeleton";
 import { Button } from "@/components/ui/button";
 
@@ -27,7 +27,7 @@ const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async () => {
     try {
       const response = await fetch(`${apiUrl}/activities`, {
         cache: "no-store",
@@ -43,11 +43,11 @@ const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiUrl]);
 
   useEffect(() => {
     fetchActivities();
-  }, []);
+  }, [fetchActivities]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -70,10 +70,6 @@ const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
       <ul className="list-none p-0">
         {Array.from({ length: 3 }).map((_, index) => (
           <li key={index} className="group relative pb-3">
-            {/* <span
-              aria-hidden="true"
-              className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-slate-100 dark:bg-gray-900 z-0"
-            ></span> */}
             <div className="relative flex items-center bg-slate-100 z-10 rounded-md">
               <Skeleton className="h-8 w-8 rounded-md" />
               <div className="flex justify-between items-center w-full ml-2">

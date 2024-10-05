@@ -79,7 +79,7 @@ export default function EditForm() {
     }
 
     fetchData();
-  }, [id, form, toast]);
+  }, [id, form, toast, apiUrl]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const userId = await getUserId();

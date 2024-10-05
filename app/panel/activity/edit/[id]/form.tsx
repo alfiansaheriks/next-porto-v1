@@ -33,6 +33,8 @@ export default function ProfileForm() {
     },
   });
 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     async function fetchData() {
       if (id) {
@@ -57,10 +59,9 @@ export default function ProfileForm() {
       }
     }
     fetchData();
-  }, [id, form]);
+  }, [id, form, apiUrl]);
 
   const { toast } = useToast();
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // console.log(values);

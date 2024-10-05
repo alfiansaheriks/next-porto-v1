@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -37,7 +37,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       const response = await fetch(`${apiUrl}/posts`, {
         cache: "no-store",
@@ -53,11 +53,11 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiUrl]);
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [fetchPosts]);
 
   if (loading) {
     return (

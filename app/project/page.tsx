@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import alfiansaherikgans from "../assets/erikganz.jpg";
 import { Skeleton } from "@nextui-org/skeleton";
@@ -23,7 +23,7 @@ const PostsPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       const response = await fetch(`${apiUrl}/projects`, {
         cache: "no-store",
@@ -39,11 +39,11 @@ const PostsPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiUrl]);
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [fetchProjects]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
