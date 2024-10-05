@@ -1,4 +1,4 @@
-import ProjectForm from "./Form";
+import ProjectForm from "./form";
 export default async function CreateProjectPage() {
   return (
     <div className="container mx-auto z-10">

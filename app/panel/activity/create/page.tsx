@@ -1,5 +1,5 @@
 import React from 'react'
-import ActivityForm from './Form'
+import ActivityForm from './form'
 
 const CreateActivityPage = () => {
   return (
