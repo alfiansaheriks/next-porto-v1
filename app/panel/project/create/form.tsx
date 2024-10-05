@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import DatePicker from "./date-picker";
 import {
   Select,
   SelectContent,
@@ -64,12 +63,9 @@ export default function ProfileForm() {
 
     // Manually format the date to MM-DD-YYYY
     const date = new Date(values.date);
-    const formattedDate = `${(date.getMonth() + 1)
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
       .toString()
-      .padStart(2, "0")}-${date
-      .getDate()
-      .toString()
-      .padStart(2, "0")}-${date.getFullYear()}`;
+      .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
 
     const dataToSend = {
       ...values,

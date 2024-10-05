@@ -10,27 +10,27 @@ import { getCookie, deleteCookie, setCookie } from "@/utils/cookie";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
-import { loginUser, LoginData } from "@/app/login/action"; // Import loginUser and LoginData
 
 export default function Home() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleCategoryChange = () => {
     router.push("/category");
   };
 
   const handleProjectButton = () => {
-    router.push("/project/manage");
-  }
+    router.push("/panel/project");
+  };
 
   const handleActivityButton = () => {
     router.push("/panel/activity");
-  }
+  };
 
-  const handlePostsButton = () => { 
+  const handlePostsButton = () => {
     router.push("/panel/posts");
-  }
+  };
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -48,6 +48,25 @@ export default function Home() {
     router.push("/"); // Sesuaikan path jika diperlukan
   };
 
+  useEffect(() => {
+    const detectDevice = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    detectDevice(); // Initial check
+
+    window.addEventListener("resize", detectDevice); // Add event listener for resize
+
+    return () => {
+      window.removeEventListener("resize", detectDevice); // Clean up event listener on unmount
+    };
+  }, []);
+
+
   return (
     <>
       <div className="flex flex-col h-full mx-auto w-full">
@@ -58,9 +77,9 @@ export default function Home() {
             </Button>
           </div>
         )}
-        <div className=" flex-1 flex flex-row justify-between items-center">
+        <div className="flex-1 flex flex-row justify-between items-center mt-10 lg:mt-0">
           <div>
-            <h1 className="text-lg font-semibold">
+            <h1 className="lg:text-lg font-semibold">
               Hey, I&apos;m Alfiansah Erik Sugiarto — a full stack dev.
             </h1>
             <h1 className="text-md font-semibold text-gray-500">
@@ -70,15 +89,17 @@ export default function Home() {
             </h1>
           </div>
           <div>
-            <Image
-              src={alfiansaherikgans}
-              alt="Alfiansah Erik"
-              className="w-24 h-24 rounded-full"
-            />
+            {!isMobile && (
+              <Image
+                src={alfiansaherikgans}
+                alt="Alfiansah Erik"
+                className="w-24 h-24 rounded-full"
+              />
+            )}
           </div>
         </div>
         <section id="all-section" className="justify-center items-center">
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative lg:min-w-[450px]">
               <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
                 Projects
@@ -101,7 +122,7 @@ export default function Home() {
                 </div>
               )}
             </div>
-            <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative lg:min-w-[200px] ml-16">
+            <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative lg:min-w-[200px] lg:ml-16">
               <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
                 Activity
               </h2>
@@ -115,18 +136,18 @@ export default function Home() {
               )}
             </div>
           </div>
-          <div className="bg-white rounded-lg mt-10 border border-gray-200 relative lg:w-full p-6">
+          <div className="bg-white rounded-lg mt-10 border border-gray-200 relative lg:w-full px-4 py-4 lg:p-6">
             <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
               Posts
             </h2>
             <PostsList isLoggedIn={isLoggedIn} />
             {isLoggedIn && (
-                <div className="flex justify-end mt-2">
-                  <Button onClick={handlePostsButton} variant={"outline"}>
-                    <Icon icon="material-symbols:manage-history-rounded" />
-                  </Button>
-                </div>
-              )}
+              <div className="flex justify-end mt-2">
+                <Button onClick={handlePostsButton} variant={"outline"}>
+                  <Icon icon="material-symbols:manage-history-rounded" />
+                </Button>
+              </div>
+            )}
           </div>
         </section>
       </div>

@@ -42,6 +42,7 @@ export type Projects = {
   slug: string;
 };
 
+
 export const columns: ColumnDef<Projects>[] = [
   {
     id: "select",
@@ -124,7 +125,7 @@ export const columns: ColumnDef<Projects>[] = [
               method: "DELETE",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${getToken()}`,
+                Authorization: `Bearer ${await getToken()}`,
               },
             }
           );
@@ -132,6 +133,7 @@ export const columns: ColumnDef<Projects>[] = [
           if (!response.ok) {
             const errorData = await response.json();
             console.error("Error response:", errorData);
+            console.log("Token:", await getToken());
             toast({
               title: "Error",
               description: "Failed to delete the project",

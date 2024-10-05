@@ -119,7 +119,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
                     icon={post.icon}
                     className="h-5 w-5 mr-2 text-gray-400 group-hover:text-gray-500"
                   />
-                  <div className="flex justify-between items-center w-full">
+                  <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center w-full">
                     <h3 className="text-xs font-semibold text-gray-400 group-hover:text-gray-500">
                       {post.title}
                     </h3>

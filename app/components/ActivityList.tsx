@@ -104,7 +104,7 @@ const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
                 className="text-xl text-gray-400 w-4 h-4 group-hover:text-gray-500"
               />{" "}
             </div>
-            <div className="flex justify-between items-center w-full">
+            <div className="flex justify-between items-center w-full space-x-4">
               <span className="ml-2 text-xs font-semibold text-gray-400 group-hover:text-gray-500 items-center">
                 {activity.name}
               </span>

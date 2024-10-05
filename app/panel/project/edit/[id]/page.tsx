@@ -1,5 +1,5 @@
 import React from 'react'
-import EditForm from './form'
+import EditForm from './Form'
 
 const EditPage = () => {
   return (

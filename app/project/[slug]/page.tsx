@@ -80,22 +80,22 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <>
       <div className="flex flex-col items-center mt-10">
-        <h1 className="font-bold text-5xl py-2">{project.name}</h1>
+        <h1 className="font-bold text-2xl lg:text-5xl py-2">{project.name}</h1>
         <div className="flex flex-row justify-between text-gray-500 py-4 w-full">
-          <p className="flex items-center">{formatDate(project.createdAt)}</p>
-          <hr className="lg:w-[80%] h-1 mx-auto my-4 bg-slate-200 border-0 rounded md:my-10 dark:bg-gray-700" />
+          <p className="flex items-center text-xs lg:text-base mt-2 lg:mt-0 text-gray-400">{formatDate(project.createdAt)}</p>
+          <hr className="w-[50%] lg:w-[80%] mt-[10%] h-0.5 lg:h-1 mx-auto my-4 bg-slate-200 border-0 rounded md:my-10 dark:bg-gray-700" />
           <Image
             src={alfiansaherikgans}
             alt="Alfiansah Erik"
-            className="flex items-center w-20 h-20 rounded-full"
+            className="flex items-center mt-3 w-10 h-10 lg:w-20 lg:h-20 rounded-full"
           />
         </div>
         <div
           dangerouslySetInnerHTML={{ __html: project.description }}
-          className=""
+          className="text-xs text-gray-400 lg:text-base w-full text-justify"
         />
       </div>
-      <Button onClick={goBack} className="flex items-start mt-4 px-2 py-2 text-xs w-[10%] h-[1%] rounded-lg bg-transparent hover:bg-gray-100 hover:border hover:border-gray-200 shadow-none font-bold text-gray-500">
+      <Button onClick={goBack} className="flex items-start mt-10 lg:mt-4 px-8 py-2 lg:px-2 lg:py-2 text-xs w-[10%] h-[1%] rounded-lg bg-transparent hover:bg-gray-100 hover:border hover:border-gray-200 shadow-none font-bold text-gray-500">
         <FontAwesomeIcon icon={faArrowLeftLong} className="mt-0.5 mr-2" />
         Go back
       </Button>

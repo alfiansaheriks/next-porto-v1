@@ -149,7 +149,7 @@ export const columns: ColumnDef<Projects>[] = [
                   const slug = await fetchProjectId(projectId);
                   if (slug) {
                     console.log("Edit project with id:", projectId);
-                    window.location.href = `/project/manage/edit/${projectId}`;
+                    window.location.href = `/panel/project/edit/${projectId}`;
                   }
                 }}
               >

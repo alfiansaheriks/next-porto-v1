@@ -104,16 +104,6 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
     return `${day}-${month}-${year}`;
   };
 
-  const handleEdit = (id: number) => {
-    // Handle edit logic here
-    console.log(`Edit project with id: ${id}`);
-  };
-
-  const handleDelete = (id: number) => {
-    // Handle delete logic here
-    console.log(`Delete project with id: ${id}`);
-  };
-
   return (
     <div className="overflow-hidden max-h-64">
       <div className="overflow-y-auto max-h-64 no-scrollbar">
@@ -129,7 +119,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
                     icon={project.icon}
                     className="h-5 w-5 mr-2 text-gray-400 group-hover:text-gray-500"
                   />
-                  <div className="flex justify-between items-center w-full">
+                  <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center w-full">
                     <h3 className="text-xs font-semibold text-gray-400 group-hover:text-gray-500">
                       {project.name}
                     </h3>

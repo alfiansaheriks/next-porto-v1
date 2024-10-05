@@ -38,12 +38,9 @@ export default function ProfileForm() {
     // console.log(values);
 
     const date = new Date(values.date);
-    const formattedDate = `${(date.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${date
-      .getDate()
-      .toString()
-      .padStart(2, "0")}-${date.getFullYear()}`;
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
 
     const dataToSend = {
       ...values,
@@ -78,7 +75,7 @@ export default function ProfileForm() {
       // console.log("Success:", data);
       toast({
         title: "Success",
-        description: "Activity updated successfully",
+        description: "Activity created successfully",
       });
     } catch (error) {
       console.error("Error:", error);

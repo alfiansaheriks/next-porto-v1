@@ -76,7 +76,7 @@ export function DataTable<TData, TValue>({
   });
 
   const handleCreateButton = () => {
-    router.push("/project/manage/create");
+    router.push("/panel/project/create");
   }
 
   return (

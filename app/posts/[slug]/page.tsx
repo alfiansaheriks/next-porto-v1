@@ -20,6 +20,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const router = useRouter();
   const [posts, setPosts] = useState<Project | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   async function goBack() {
     router.back();
@@ -29,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3333/posts/${params.slug}`
+          `${apiUrl}/posts/${params.slug}`
         );
         if (!response.ok) {
           const errorText = await response.text();
@@ -46,7 +47,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     };
 
     fetchPosts();
-  }, [params.slug]);
+  }, [params.slug, apiUrl]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -83,25 +84,25 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <>
       <div className="flex flex-col items-center mt-10">
-        <h1 className="font-bold text-5xl py-2">{posts.title}</h1>
+        <h1 className="font-bold text-2xl lg:text-5xl py-2">{posts.title}</h1>
         <div className="flex flex-row justify-between text-gray-500 py-4 w-full">
-          <p className="flex items-center">{formatDate(posts.createdAt)}</p>
-          <hr className="lg:w-[80%] h-1 mx-auto my-4 bg-slate-200 border-0 rounded md:my-10 dark:bg-gray-700" />
+          <p className="flex items-center text-xs lg:text-base mt-4 lg:mt-0 text-gray-400">{formatDate(posts.createdAt)}</p>
+          <hr className="w-[50%] lg:w-[80%] mt-[10%] h-0.5 lg:h-1 mx-auto my-4 bg-slate-200 border-0 rounded md:my-10 dark:bg-gray-700" />
           <Image
             src={alfiansaherikgans}
             alt="Alfiansah Erik"
-            className="flex items-center w-20 h-20 rounded-full"
+            className="flex items-center mt-3 w-10 h-10 lg:w-20 lg:h-20 rounded-full"
           />
         </div>
         <div
-          className="w-full prose prose-lg prose-indigo mx-auto p-4 bg-white rounded-md"
+          className="w-full prose prose-lg prose-indigo mx-auto lg:p-4 bg-white text-gray-400 rounded-md text-xs text-justify lg:text-base"
           style={{ maxWidth: "100%" }}
           dangerouslySetInnerHTML={{ __html: posts.content }}
         />
       </div>
       <Button
         onClick={goBack}
-        className="flex items-start mt-4 px-2 py-2 text-xs w-[10%] h-[1%] rounded-lg bg-transparent hover:bg-gray-100 hover:border hover:border-gray-200 shadow-none font-bold text-gray-500"
+        className="flex items-start mt-10 lg:mt-4 px-8 py-2 lg:px-2 lg:py-2 text-xs w-[10%] h-[1%] rounded-lg bg-transparent hover:bg-gray-100 hover:border hover:border-gray-200 shadow-none font-bold text-gray-500"
       >
         <FontAwesomeIcon icon={faArrowLeftLong} className="mt-0.5 mr-2" />
         Go back

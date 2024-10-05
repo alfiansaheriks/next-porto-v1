@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import alfiansaherikgans from "../assets/erikganz.jpg";
 import { Skeleton } from "@nextui-org/skeleton";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Icon } from "@iconify/react";
+import PostsList from "../components/PostsList";
 
 interface Posts {
   id: number;
@@ -18,13 +16,16 @@ interface Posts {
 }
 
 const PostsPage = () => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [posts, setPosts] = useState<Posts[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
-      const response = await fetch("http://localhost:3333/posts", {
+      const response = await fetch(`${apiUrl}/posts`, {
         cache: "no-store",
       });
       if (!response.ok) {
@@ -38,10 +39,28 @@ const PostsPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiUrl]);
 
   useEffect(() => {
     fetchPosts();
+  }, [fetchPosts]);
+
+  useEffect(() => {
+    const detectDevice = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    detectDevice(); // Initial check
+
+    window.addEventListener("resize", detectDevice); // Add event listener for resize
+
+    return () => {
+      window.removeEventListener("resize", detectDevice); // Clean up event listener on unmount
+    };
   }, []);
 
   const formatDate = (dateString: string) => {
@@ -70,15 +89,17 @@ const PostsPage = () => {
               Bridging the World of Full Stack Web Development.
             </h1>
           </div>
-          <div>
-            <Image
-              src={alfiansaherikgans}
-              alt="Alfiansah Erik"
-              className="w-24 h-24 rounded-full z-10"
-            />
-          </div>
+          {!isMobile && (
+            <div>
+              <Image
+                src={alfiansaherikgans}
+                alt="Alfiansah Erik"
+                className="w-24 h-24 rounded-full z-10"
+              />
+            </div>
+          )}
         </div>
-        <div className="bg-white rounded-lg mt-10 border-2 border-gray-200 relative lg:w-full p-6">
+        <div className="bg-white rounded-lg mt-10 border-2 border-gray-200 relative lg:w-full lg:p-6">
           <h2 className="absolute -top-3 left-5 bg-white border-2 border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
             Posts
           </h2>
@@ -107,7 +128,7 @@ const PostsPage = () => {
   return (
     <>
       <div className="flex flex-col h-full mx-auto w-full">
-        <div className=" flex-1 flex flex-row justify-between items-center">
+        <div className=" flex-1 flex flex-row justify-between items-center mt-10 lg:mt-0">
           <div>
             <h1 className="text-lg font-semibold">
               Hey, I&apos;m Alfiansah Erik Sugiarto — a full stack dev.
@@ -118,47 +139,22 @@ const PostsPage = () => {
               Bridging the World of Full Stack Web Development.
             </h1>
           </div>
-          <div>
-            <Image
-              src={alfiansaherikgans}
-              alt="Alfiansah Erik"
-              className="w-24 h-24 rounded-full"
-            />
-          </div>
+          {!isMobile && (
+            <div>
+              <Image
+                src={alfiansaherikgans}
+                alt="Alfiansah Erik"
+                className="w-24 h-24 rounded-full"
+              />
+            </div>
+          )}
         </div>
         <div className="bg-white rounded-lg mt-10 border-2 border-gray-200 relative lg:w-full p-6">
           <h2 className="absolute -top-3 left-5 bg-white border-2 border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
             Posts
           </h2>
-          <div className="overflow-hidden max-h-64">
-            <div className="overflow-y-auto max-h-64 no-scrollbar">
-              <ul className="list-none p-0">
-                {posts.map((post) => (
-                  <li
-                    key={post.id}
-                    className="mb-2 group hover:bg-gray-100 rounded-md hover:border p-4"
-                  >
-                    <Link href={`/posts/${post.slug}`}>
-                      <div className="flex items-center w-full">
-                        <Icon
-                          icon={post.icon}
-                          className="h-5 w-5 mr-2 text-gray-400 group-hover:text-gray-500"
-                        />
-                        <div className="flex justify-between items-center w-full">
-                          <h3 className="truncate text-sm font-semibold text-gray-400 group-hover:text-gray-500">
-                            {post.title}
-                          </h3>
-                          <span className="text-sm text-gray-400 whitespace-nowrap">
-                            {formatDate(post.createdAt)}
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              
-            </div>
+          <div className="py-4">
+            <PostsList isLoggedIn={isLoggedIn} />
           </div>
         </div>
       </div>
