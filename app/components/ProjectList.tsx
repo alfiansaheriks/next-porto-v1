@@ -39,14 +39,17 @@ interface ProjectListProps {
   isLoggedIn: boolean;
 }
 
+
 const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch("http://localhost:3333/projects", {
+      const response = await fetch(`${apiUrl}/projects`, {
         cache: "no-store",
       });
       if (!response.ok) {
@@ -130,38 +133,9 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
                     <h3 className="text-xs font-semibold text-gray-400 group-hover:text-gray-500">
                       {project.name}
                     </h3>
-                    {!isLoggedIn && (
                       <span className="text-xs text-gray-400 whitespace-nowrap">
                         {formatDate(project.date)}
                       </span>
-                    )}
-                    {isLoggedIn && (
-                      <DropdownMenu>
-                        <DropdownMenuTrigger>
-                          <Button
-                            variant={"outline"}
-                            className="ml-2 focus:outline-none shadow-none border-none bg-transparent hover:bg-transparent"
-                          >
-                            <Icon
-                              icon="mdi:dots-vertical"
-                              className="h-5 w-5 text-gray-500"
-                            />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem
-                            onClick={() => handleEdit(project.id)}
-                          >
-                            Edit
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => handleDelete(project.id)}
-                          >
-                            Delete
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    )}
                   </div>
                 </div>
               </Link>

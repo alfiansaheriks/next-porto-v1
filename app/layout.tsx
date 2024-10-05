@@ -7,6 +7,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { FloatingDockDemo } from "@/ui/floating-dock";
+import { Toaster } from "@/components/ui/toaster";
 config.autoAddCss = false
 
 // const geistSans = localFont({
@@ -32,12 +33,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-white">
       <BackgroundBeamsWithCollision>
         <Container>
         {/* <NavLinks /> */}
-        <main>{children}</main>
+        <main className="mb-10">{children}</main>
         <FloatingDockDemo />
+        <Toaster />
         </Container>
         </BackgroundBeamsWithCollision>
       </body>

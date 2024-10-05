@@ -18,6 +18,7 @@ interface Project {
 
 export default function Page({ params }: { params: { slug: string } }) {
   const router = useRouter();
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [project, setProject] = useState<Project | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     const fetchProject = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3333/projects/${params.slug}`
+          `${apiUrl}/project/${params.slug}`
         );
         if (!response.ok) {
           const errorText = await response.text();

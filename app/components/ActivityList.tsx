@@ -22,13 +22,14 @@ interface ActivityListProps {
 }
 
 const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [activities, setActivites] = useState<Activity[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchActivities = async () => {
     try {
-      const response = await fetch("http://localhost:3333/activities", {
+      const response = await fetch(`${apiUrl}/activities`, {
         cache: "no-store",
       });
       if (!response.ok) {
@@ -111,34 +112,9 @@ const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
               <span className="ml-2 text-xs font-semibold text-gray-400 group-hover:text-gray-500 items-center">
                 {activity.name}
               </span>
-              {!isLoggedIn && (
                 <span className="text-xs text-gray-400">
                 {formatDate(activity.date)}
               </span>
-              )}
-              {isLoggedIn && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger>
-                    <Button
-                      variant={"outline"}
-                      className="ml-2 focus:outline-none shadow-none border-none bg-transparent hover:bg-transparent"
-                    >
-                      <Icon
-                        icon="mdi:dots-vertical"
-                        className="h-5 w-5 text-gray-500"
-                      />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => handleEdit(activity.id)}>
-                      Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleDelete(activity.id)}>
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
             </div>
           </a>
         </li>

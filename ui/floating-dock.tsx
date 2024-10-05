@@ -20,6 +20,13 @@ export function FloatingDockDemo() {
       href: "/",
     },
     {
+      title: "Projects",
+      icon: (
+        <Icon icon="bi:grid-3x3-gap-fill" className="h-full w-full text-gray-600 hover:text-gray-400" />
+      ),
+      href: "/project",
+    },
+    {
       title: "Posts",
       icon: (
         <Icon icon="bi:file-earmark-text" className="h-full w-full text-gray-600 hover:text-gray-400" />

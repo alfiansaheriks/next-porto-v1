@@ -30,5 +30,8 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     '/dashboard/:path*', 
-    '/protected/:path*'],
+    '/protected/:path*',
+    '/project/manage/:path*',
+    '/panel/:path*',
+  ],
 };

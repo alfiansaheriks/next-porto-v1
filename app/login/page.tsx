@@ -41,7 +41,8 @@ const Login = () => {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     setError(null);
     try {
-      await loginUser(data as LoginData);
+      const result = await loginUser(data as LoginData);
+      // console.log("Login response:", result); 
       router.push("/");
     } catch (err: any) {
         setError(err.message || "Terjadi kesalahan saat login");
