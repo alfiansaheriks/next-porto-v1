@@ -9,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
+import React from "react";
 import { useRef, useState } from "react";
 
 export const FloatingDock = ({

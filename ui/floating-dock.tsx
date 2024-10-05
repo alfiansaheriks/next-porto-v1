@@ -38,14 +38,14 @@ export function FloatingDockDemo() {
       icon: (
         <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/twitter",
+      href: "https://x.com/airmatamonyet",
     },
     {
       title: "GitHub",
       icon: (
         <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/github",
+      href: "https://github.com/alfiansaheriks",
     },
   ];
 
