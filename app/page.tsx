@@ -10,6 +10,8 @@ import { getCookie, deleteCookie, setCookie } from "@/utils/cookie";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
+import { Metadata } from "next";
+
 
 export default function Home() {
   const router = useRouter();
