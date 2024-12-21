@@ -16,11 +16,11 @@ export function middleware(req: NextRequest) {
   }
 
   // Redirect to login if token is missing
-  if (!token) {
-    const loginUrl = req.nextUrl.clone();
-    loginUrl.pathname = '/login';
-    return NextResponse.redirect(loginUrl);
-  }
+  // if (!token) {
+  //   const loginUrl = req.nextUrl.clone();
+  //   loginUrl.pathname = '/login';
+  //   return NextResponse.redirect(loginUrl);
+  // }
 
   // Continue to the protected route if token exists
   return NextResponse.next();

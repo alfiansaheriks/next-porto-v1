@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@nextui-org/skeleton";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 interface Project {
   name: string;
@@ -29,9 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await fetch(
-          `${apiUrl}/project/${params.slug}`
-        );
+        const response = await fetch(`${apiUrl}/project/${params.slug}`);
         if (!response.ok) {
           const errorText = await response.text();
           console.error("Error response:", errorText);
@@ -69,7 +68,10 @@ export default function Page({ params }: { params: { slug: string } }) {
           <Skeleton className="w-20 h-20 rounded-full" />
         </div>
         <Skeleton className="w-full h-40" />
-        <Button onClick={goBack} className="flex items-start mt-4 px-2 py-2 text-xs w-[10%] h-[1%] rounded-lg bg-transparent hover:bg-gray-100 hover:border hover:border-gray-200 shadow-none font-bold text-gray-500">
+        <Button
+          onClick={goBack}
+          className="flex items-start mt-4 px-2 py-2 text-xs w-[10%] h-[1%] rounded-lg bg-transparent hover:bg-gray-100 hover:border hover:border-gray-200 shadow-none font-bold text-gray-500"
+        >
           <FontAwesomeIcon icon={faArrowLeftLong} className="mt-0.5 mr-2" />
           Go back
         </Button>
@@ -80,22 +82,30 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <>
       <div className="flex flex-col items-center mt-10">
-        <h1 className="font-bold text-2xl lg:text-5xl py-2">{project.name}</h1>
-        <div className="flex flex-row justify-between text-gray-500 py-4 w-full">
-          <p className="flex items-center text-xs lg:text-base mt-2 lg:mt-0 text-gray-400">{formatDate(project.createdAt)}</p>
-          <hr className="w-[50%] lg:w-[80%] mt-[10%] h-0.5 lg:h-1 mx-auto my-4 bg-slate-200 border-0 rounded md:my-10 dark:bg-gray-700" />
+        <div className="flex flex-col justify-start items-start w-full">
+          <Icon icon={project.icon} className="h-8 w-8 text-black" />
+          <h1 className="font-bold text-xl lg:text-2xl py-2">{project.name}</h1>
+        </div>
+        <div className="flex flex-row justify-between text-gray-500 py-2 w-full">
+          <p className="flex items-center text-xs lg:text-base mt-2 lg:mt-0 text-gray-400">
+            {formatDate(project.createdAt)}
+          </p>
+          <hr className="w-[50%] lg:w-[79%] mt-[10%] h-0.5 lg:h-1 mx-auto my-4 bg-slate-200 border-0 rounded md:my-10 dark:bg-gray-700" />
           <Image
             src={alfiansaherikgans}
             alt="Alfiansah Erik"
-            className="flex items-center mt-3 w-10 h-10 lg:w-20 lg:h-20 rounded-full"
+            className="flex items-center mt-6 w-10 h-10 lg:w-20 lg:h-20 rounded-full"
           />
         </div>
         <div
           dangerouslySetInnerHTML={{ __html: project.description }}
-          className="text-xs text-gray-400 lg:text-base w-full text-justify"
+          className="mt-4 text-sm lg:text-base font-light text-gray-600 lg:text-gray-400 w-full text-justify leading-relaxed tracking-wide"
         />
       </div>
-      <Button onClick={goBack} className="flex items-start mt-10 lg:mt-4 px-8 py-2 lg:px-2 lg:py-2 text-xs w-[10%] h-[1%] rounded-lg bg-transparent hover:bg-gray-100 hover:border hover:border-gray-200 shadow-none font-bold text-gray-500">
+      <Button
+        onClick={goBack}
+        className="flex items-start mt-10 lg:mt-4 px-8 py-2 lg:px-2 lg:py-2 text-xs w-[10%] h-[1%] rounded-lg bg-transparent hover:bg-gray-100 hover:border hover:border-gray-200 shadow-none font-bold text-gray-500"
+      >
         <FontAwesomeIcon icon={faArrowLeftLong} className="mt-0.5 mr-2" />
         Go back
       </Button>

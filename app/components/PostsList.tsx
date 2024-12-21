@@ -59,29 +59,6 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
     fetchPosts();
   }, [fetchPosts]);
 
-  if (loading) {
-    return (
-      <div className="overflow-hidden max-h-64">
-        <div className="overflow-y-auto max-h-64 scrollbar-hidden">
-          <ul className="list-none p-0">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <li
-                key={index}
-                className="mb-2 bg-slate-100 rounded-md hover:border p-2 flex items-center"
-              >
-                <Skeleton className="h-4 w-4 mr-2" />
-                <div className="flex justify-between w-full">
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-4 w-1/4" />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  }
-
   if (error) {
     return <p>{error}</p>;
   }

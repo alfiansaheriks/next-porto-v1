@@ -8,6 +8,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { FloatingDockDemo } from "@/ui/floating-dock";
 import { Toaster } from "@/components/ui/toaster";
+import { Meteors } from "@/components/ui/meteors";
+import { Inter } from 'next/font/google';
 config.autoAddCss = false
 
 // const geistSans = localFont({
@@ -20,6 +22,8 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
+const inter = Inter({ subsets: ["latin"] });
 
   const tags: any = [];
   const keywords = tags.length > 0 ? tags.join(", ") : "web development, JavaScript, React, Next.js, frontend, backend, full-stack, programming, coding, software engineering, technology, tutorial, guide, best practices, performance, SEO, web design, UI/UX, API, cloud computing";
@@ -51,15 +55,14 @@ export default function RootLayout({
   return (
     <html lang="en">
     <meta name="google-adsense-account" content="ca-pub-8993382717373531"></meta>
-      <body className="bg-white">
-      <BackgroundBeamsWithCollision>
+      <body className={`bg-white ${inter.className}`}>
+        {/* <Meteors /> */}
         <Container>
         {/* <NavLinks /> */}
         <main className="mb-10">{children}</main>
         <FloatingDockDemo />
         <Toaster />
         </Container>
-        </BackgroundBeamsWithCollision>
       </body>
     </html>
   )
