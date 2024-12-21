@@ -85,7 +85,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
       <div className="overflow-y-auto max-h-64 no-scrollbar">
         <ul className="list-none p-0">
           {projects.map((project) => (
-            <div>
+            <div key={project.id}>
               <li
                 key={project.id}
                 className="mb-2 group hover:bg-gray-100 rounded-md hover:border p-2"
