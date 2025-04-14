@@ -121,11 +121,28 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
-          <div className="bg-white rounded-lg mt-10 border border-gray-200 relative lg:w-1/4 px-4 py-4 lg:p-6">
-            <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
-              Music
-            </h2>
-            <Playlist />
+          <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mt-10">
+            {/* Music Section */}
+            <div className="bg-white rounded-2xl border border-gray-200 relative flex-1 p-6 min-h-[143px]">
+              <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold shadow-sm">
+                Music
+              </h2>
+              <div className="max-h-64 overflow-y-auto pr-2 h-full">
+                <Playlist />
+              </div>
+            </div>
+
+            {/* Under Construction Section */}
+            <div className="bg-white rounded-2xl border border-gray-200 relative flex-1 p-6 min-h-[143px]">
+              <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold shadow-sm">
+                Under Construction
+              </h2>
+              <div className="max-h-64 overflow-y-auto pr-2 h-full flex items-center justify-center">
+                <p className="text-gray-400 font-semibold text-sm">
+                  Under construction
+                </p>
+              </div>
+            </div>
           </div>
         </section>
       </div>
