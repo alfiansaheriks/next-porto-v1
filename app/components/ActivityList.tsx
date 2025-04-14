@@ -21,6 +21,27 @@ interface ActivityListProps {
   isLoggedIn: boolean;
 }
 
+const activityData = [
+  {
+    id: 1,
+    name: "Joined @UTC",
+    date: "2024-06-12",
+    icon: "ph:planet",
+  },
+  {
+    id: 2,
+    name: "Founded Dua Langkah Bersama",
+    date: "2024-05-01",
+    icon: "ri:shake-hands-line", 
+  },
+  {
+    id: 3,
+    name: "Born Day!",
+    date: "2002-01-20",
+    icon: "iconoir:birthday-cake",
+  }
+]
+
 const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [activities, setActivites] = useState<Activity[]>([]);
@@ -45,9 +66,9 @@ const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
     }
   }, [apiUrl]);
 
-  useEffect(() => {
-    fetchActivities();
-  }, [fetchActivities]);
+  // useEffect(() => {
+  //   fetchActivities();
+  // }, [fetchActivities]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -71,7 +92,7 @@ const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
 
   return (
     <ul className="list-none p-0 no-scrollbar">
-      {activities.map((activity, index) => (
+      {activityData.map((activity, index) => (
         <li key={index} className="group relative pb-3">
           {index < activities.length - 1 && (
             <span

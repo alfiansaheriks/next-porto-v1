@@ -9,7 +9,7 @@ const {
 } = process.env;
 
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
-const PLAYLIST_ENDPOINT = 'https://api.spotify.com/v1/me/playlists';
+const PLAYLIST_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
 const token = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
 // Function to get access token
@@ -54,9 +54,21 @@ const getUserPlaylists = async (accessToken: string) => {
 export async function GET() {
   try {
     const accessToken = await getAccessToken();
-    const playlists = await getUserPlaylists(accessToken);
+    const data = await getUserPlaylists(accessToken);
 
-    return NextResponse.json(playlists, {
+    if (!data?.is_playing) {
+      return NextResponse.json({ isPlaying: false });
+    }
+
+    const track = {
+      isPlaying: true,
+      title: data.item.name,
+      artist: data.item.artists.map((artist: any) => artist.name).join(', '),
+      albumImageUrl: data.item.album.images[0].url,
+      songUrl: data.item.external_urls.spotify,
+    };
+
+    return NextResponse.json(track, {
       status: 200,
       headers: {
         'Cache-Control': 'no-store',
@@ -65,6 +77,7 @@ export async function GET() {
     });
   } catch (error: any) {
     console.error('Error:', error.message);
-    return NextResponse.json({ error: 'Failed to fetch playlists from Spotify' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch now playing from Spotify' }, { status: 500 });
   }
 }
+

@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 import { Meteors } from "@/components/ui/meteors";
+import Playlist from "./components/NowPlaying";
 
 export default function Home() {
   const router = useRouter();
@@ -100,7 +101,9 @@ export default function Home() {
                 <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
                   Projects
                 </h2>
-                <ProjectList isLoggedIn={isLoggedIn} />
+                <div className="max-h-64 overflow-y-auto pr-2">
+                  <ProjectList isLoggedIn={isLoggedIn} />
+                </div>
               </div>
             </motion.div>
             <motion.div
@@ -108,19 +111,21 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }} // Akhir
               transition={{ duration: 1 }} // Durasi animasi
             >
-            <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative lg:ml-4">
-              <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
-                Activity
-              </h2>
-              <ActivityList isLoggedIn={isLoggedIn} />
-            </div>
+              <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative lg:ml-4">
+                <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
+                  Activity
+                </h2>
+                <div className="max-h-64 overflow-y-auto pr-2">
+                  <ActivityList isLoggedIn={isLoggedIn} />
+                </div>
+              </div>
             </motion.div>
           </div>
-          <div className="bg-white rounded-lg mt-10 border border-gray-200 relative lg:w-full px-4 py-4 lg:p-6">
+          <div className="bg-white rounded-lg mt-10 border border-gray-200 relative lg:w-1/4 px-4 py-4 lg:p-6">
             <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
-              Posts
+              Music
             </h2>
-            <PostsList isLoggedIn={isLoggedIn} />
+            <Playlist />
           </div>
         </section>
       </div>
