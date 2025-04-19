@@ -25,6 +25,7 @@ interface Project {
   date: string;
   slug: string;
   icon: string; // e.g., 'faChartSimple'
+  github?: string;
 }
 
 const iconMapping: Record<string, any> = {
@@ -41,12 +42,42 @@ interface ProjectListProps {
 const projectData = [
   {
     id: 1,
+    name: "MovieFlix",
+    description: "Description of Project 1",
+    categoryId: 1,
+    date: "2023-10-01",
+    slug: "project-1",
+    github: "https://github.com/alfiansaheriks/movieflix",
+    icon: "material-symbols:mobile-hand-outline-rounded",
+  },
+  {
+    id: 1,
+    name: "Vet Petshop API",
+    description: "Description of Project 1",
+    categoryId: 1,
+    date: "2023-10-01",
+    slug: "project-1",
+    github: "https://github.com/alfiansaheriks/vet-pet-shop",
+    icon: "material-symbols:pet-supplies-outline",
+  },
+  {
+    id: 1,
+    name: "LessGoo API (Online Transportation App)",
+    description: "Description of Project 1",
+    categoryId: 1,
+    date: "2023-10-01",
+    slug: "project-1",
+    github: "",
+    icon: "material-symbols:transportation-outline-rounded",
+  },
+  {
+    id: 1,
     name: "Akademik UMBB",
     description: "Description of Project 1",
     categoryId: 1,
     date: "2023-10-01",
     slug: "project-1",
-    icon: "-",
+    icon: "material-symbols:insert-chart-outline-rounded",
   },
   {
     id: 1,
@@ -55,7 +86,7 @@ const projectData = [
     categoryId: 1,
     date: "2023-10-01",
     slug: "project-1",
-    icon: "-",
+    icon: "material-symbols:insert-chart-outline-rounded",
   },
   {
     id: 1,
@@ -64,7 +95,7 @@ const projectData = [
     categoryId: 1,
     date: "2023-10-01",
     slug: "project-1",
-    icon: "-",
+    icon: "material-symbols:insert-chart-outline-rounded",
   },
   {
     id: 1,
@@ -73,7 +104,7 @@ const projectData = [
     categoryId: 1,
     date: "2023-10-01",
     slug: "project-1",
-    icon: "-",
+    icon: "material-symbols:insert-chart-outline-rounded",
   },
   {
     id: 1,
@@ -100,6 +131,7 @@ const projectData = [
     categoryId: 1,
     date: "2023-10-01",
     slug: "project-1",
+    github:"https://github.com/alfiansaheriks/AjakanRevamp",
     icon: "tabler:brand-nuxt",
   },
   {
@@ -182,7 +214,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
                 key={project.id}
                 className="mb-2 group hover:bg-gray-100 rounded-md hover:border p-2"
               >
-                <Link href={`/project/${project.slug}`}>
+                <Link href={project.github || "#"} target="_blank">
                   <div className="flex items-center w-full">
                     <Icon
                       icon={project.icon}

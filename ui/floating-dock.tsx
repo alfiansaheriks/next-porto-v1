@@ -19,19 +19,26 @@ export function FloatingDockDemo() {
       ),
       href: "/",
     },
+    // {
+    //   title: "Projects",
+    //   icon: (
+    //     <Icon icon="bi:grid-3x3-gap-fill" className="h-full w-full text-gray-600 hover:text-gray-400" />
+    //   ),
+    //   href: "/project",
+    // },
+    // {
+    //   title: "Posts",
+    //   icon: (
+    //     <Icon icon="bi:file-earmark-text" className="h-full w-full text-gray-600 hover:text-gray-400" />
+    //   ),
+    //   href: "/posts",
+    // },
     {
-      title: "Projects",
+      title: "LinkedIn",
       icon: (
-        <Icon icon="bi:grid-3x3-gap-fill" className="h-full w-full text-gray-600 hover:text-gray-400" />
+        <Icon icon="bi:linkedin" className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/project",
-    },
-    {
-      title: "Posts",
-      icon: (
-        <Icon icon="bi:file-earmark-text" className="h-full w-full text-gray-600 hover:text-gray-400" />
-      ),
-      href: "/posts",
+      href: "https://www.linkedin.com/in/alfiansaheriks/",
     },
     {
       title: "Twitter",
