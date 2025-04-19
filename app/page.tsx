@@ -13,6 +13,7 @@ import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 import { Meteors } from "@/components/ui/meteors";
 import Playlist from "./components/NowPlaying";
+import { GrTools } from "react-icons/gr";
 
 export default function Home() {
   const router = useRouter();
@@ -65,10 +66,10 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }} // Akhir
             transition={{ duration: 1 }} // Durasi animasi
           >
-            <h1 className="lg:text-xl font-semibold">
+            <h1 className="lg:text-[30px] font-bold">
               Hey, I&apos;m Alfiansah Erik Sugiarto — a full stack dev.
             </h1>
-            <h1 className="text-lg font-semibold text-gray-500">
+            <h1 className="text-[16px] font-medium text-gray-500">
               Crafting Seamless Solutions in Cyberspace,
               <br />
               Bridging the World of Full Stack Web Development.
@@ -98,7 +99,7 @@ export default function Home() {
               transition={{ duration: 1 }} // Durasi animasi
             >
               <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative ">
-                <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
+                <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-semibold mb-4">
                   Projects
                 </h2>
                 <div className="max-h-64 overflow-y-auto pr-2">
@@ -112,7 +113,7 @@ export default function Home() {
               transition={{ duration: 1 }} // Durasi animasi
             >
               <div className="bg-white rounded-lg px-4 py-4 mt-10 border border-gray-200 relative lg:ml-4">
-                <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold mb-4">
+                <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-semibold mb-4">
                   Activity
                 </h2>
                 <div className="max-h-64 overflow-y-auto pr-2">
@@ -121,28 +122,47 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
+
           <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mt-10">
             {/* Music Section */}
-            <div className="bg-white rounded-2xl border border-gray-200 relative flex-1 p-6 min-h-[143px]">
-              <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold shadow-sm">
-                Music
-              </h2>
-              <div className="max-h-64 overflow-y-auto pr-2 h-full">
-                <Playlist />
+            <motion.div
+              initial={{ opacity: 0, y: 50 }} // Awal fade dan dari bawah
+              animate={{ opacity: 1, y: 0 }} // Akhir
+              transition={{ duration: 1 }} // Durasi animasi
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="bg-white rounded-2xl border border-gray-200 relative flex-1 p-6 min-h-[143px] w-full md:w-full lg:w-full xl:w-full">
+                <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-semibold shadow-sm">
+                  Music
+                </h2>
+                <div className="max-h-64 overflow-y-auto pr-2 h-full">
+                  <Playlist />
+                </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Under Construction Section */}
-            <div className="bg-white rounded-2xl border border-gray-200 relative flex-1 p-6 min-h-[143px]">
-              <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-bold shadow-sm">
-                Under Construction
-              </h2>
-              <div className="max-h-64 overflow-y-auto pr-2 h-full flex items-center justify-center">
-                <p className="text-gray-400 font-semibold text-sm">
-                  Under construction
-                </p>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2 }}
+              className="flex-1"
+            >
+              <div className="bg-white rounded-2xl border border-gray-200 relative flex-1 p-6 min-h-[143px] w-full md:w-full lg:w-full xl:w-full mt-5 md:mt-0 lg:mt-0 xl:mt-0">
+                <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-semibold shadow-sm">
+                  Under Construction
+                </h2>
+                <div className="max-h-64 overflow-y-auto pr-2 h-full flex flex-col items-center justify-center text-center gap-2">
+                  <GrTools className="text-gray-400" size={28} />
+                  <p className="text-primary font-semibold text-sm italic">
+                    This section is under construction
+                  </p>
+                  <p className="text-gray-500 text-xs">
+                    Please check back later
+                  </p>
+                </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </div>

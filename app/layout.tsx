@@ -55,7 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en">
     <meta name="google-adsense-account" content="ca-pub-8993382717373531"></meta>
-      <body className={`bg-white ${inter.className}`}>
+      <body className={`bg-[#f9fafb] ${inter.className}`}>
         {/* <Meteors /> */}
         <Container>
         {/* <NavLinks /> */}

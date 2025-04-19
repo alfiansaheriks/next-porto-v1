@@ -108,10 +108,10 @@ const ActivityList: React.FC<ActivityListProps> = ({ isLoggedIn }) => {
               />{" "}
             </div>
             <div className="flex justify-between items-center w-full space-x-4 flex-grow">
-              <span className="ml-2 text-xs font-semibold text-gray-400 group-hover:text-gray-500 flex-grow">
+              <span className="ml-2 text-xs font-medium text-gray-400 group-hover:text-gray-500 flex-grow">
                 {activity.name}
               </span>
-              <span className="text-xs text-gray-400 truncate">
+              <span className="text-[13px] text-[#94A3B8] truncate">
                 {formatDate(activity.date)}
               </span>
             </div>

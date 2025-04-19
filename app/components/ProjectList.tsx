@@ -221,7 +221,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ isLoggedIn }) => {
                       className="h-5 w-5  mr-2 text-gray-400 group-hover:text-gray-500"
                     />
                     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center w-full">
-                      <h3 className="text-xs md:text-sm lg:text-sm font-semibold text-gray-400 group-hover:text-gray-500 truncate">
+                      <h3 className="text-xs md:text-sm lg:text-sm font-medium text-gray-400 group-hover:text-gray-500 truncate">
                         {project.name}
                       </h3>
                       {/* <span className="text-xs text-gray-400 whitespace-nowrap">
