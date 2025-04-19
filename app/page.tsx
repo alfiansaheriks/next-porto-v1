@@ -123,13 +123,14 @@ export default function Home() {
             </motion.div>
           </div>
 
-          <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mt-10">
+          <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mt-10 w-full">
             {/* Music Section */}
             <motion.div
               initial={{ opacity: 0, y: 50 }} // Awal fade dan dari bawah
               animate={{ opacity: 1, y: 0 }} // Akhir
               transition={{ duration: 1 }} // Durasi animasi
               whileHover={{ scale: 1.02 }}
+              className="w-full"
             >
               <div className="bg-white rounded-2xl border border-gray-200 relative flex-1 p-6 min-h-[143px] w-full md:w-full lg:w-full xl:w-full">
                 <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-semibold shadow-sm">
@@ -146,7 +147,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2 }}
-              className="flex-1"
+              className="w-full"
             >
               <div className="bg-white rounded-2xl border border-gray-200 relative flex-1 p-6 min-h-[143px] w-full md:w-full lg:w-full xl:w-full mt-5 md:mt-0 lg:mt-0 xl:mt-0">
                 <h2 className="absolute -top-3 left-5 bg-white border border-gray-200 rounded-full px-4 text-xs text-gray-600 font-semibold shadow-sm">
