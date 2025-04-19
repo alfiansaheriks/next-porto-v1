@@ -1,4 +1,5 @@
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 import { NextResponse } from 'next/server';
 import axios from 'axios';
@@ -17,6 +18,7 @@ const token = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 // Function to get access token
 const getAccessToken = async (): Promise<string> => {
   try {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     const response = await axios.post(
       TOKEN_ENDPOINT,
       querystring.stringify({
